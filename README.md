@@ -3,7 +3,7 @@
 **🍕 Web version**: [https://krovs.github.io/oscp-writeups](https://krovs.github.io/oscp-writeups/)
 
 <div align="center">
-    <img src=docs/assets/main.png>
+    <img src=docs/assets/main.png max-width=70%>
 </div>
 
 ## 🛡️ OSCP & eCPPTv3 Prep Writeups
