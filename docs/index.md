@@ -1,5 +1,7 @@
 # Home
 
+[📜 Notes](https://krovs.github.io/oscp-notes)
+
 <div align="center">
     <img src=assets/main.png>
 </div>
