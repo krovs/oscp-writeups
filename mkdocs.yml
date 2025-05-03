@@ -43,6 +43,7 @@ theme:
     - navigation.tracking
     - navigation.section
     - navigation.top
+    - navigation.expand
     - search.share
     - search.suggest
 
