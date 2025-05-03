@@ -1,7 +1,7 @@
 # Home
 
 <div align="center">
-    <img src=assets/main.png>
+    <img src=assets/banner.png>
 </div>
 
 ## 🛡️ OSCP & eCPPTv3 Prep Writeups
