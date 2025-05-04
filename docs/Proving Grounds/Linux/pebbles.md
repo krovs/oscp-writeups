@@ -32,4 +32,6 @@ And access port 3305
 
 ![](../assets/Pasted%20image%2020250319005417.png)
 
-Someone uploaded a reverse shell file and execute it but i can't get it to work.
+!!! failure
+
+    Someone uploaded a reverse shell file and execute it but i can't get it to work.

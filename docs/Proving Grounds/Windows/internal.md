@@ -12,7 +12,6 @@ Using searchsploit
 
 ![](../assets/Pasted%20image%2020250319124904.png)
 
-ABORT: nothing, can't seem to get it work without metasploit
+!!! failure
 
-
-
+    Nothing, can't seem to get it work without metasploit

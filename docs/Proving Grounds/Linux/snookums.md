@@ -14,4 +14,6 @@ We find https://www.exploit-db.com/exploits/48424 that says that there is a remo
 
 So we can try a php reverse shell
 
-ABORT: **reverse shell is not connecting back, i won't lose more time on this**
+!!! failure
+
+    Reverse shell is not connecting back, i won't lose more time on this
