@@ -1,4 +1,4 @@
-# Active
+# Active 🔹
 
 ![](../assets/Pasted%20image%2020250504215455.png)
 
@@ -62,7 +62,7 @@ Nmap done: 1 IP address (1 host up) scanned in 94.93 seconds
 
 Scan shares and we can read `Replication` that is a copy of SYSVOL
 
-![](assets/Pasted%20image%2020250504225306.png)
+![](../assets/Pasted%20image%2020250504225306.png)
 
 Download everything inside
 
@@ -102,7 +102,7 @@ GPPstillStandingStrong2k18
 
 Check the credential witn nxc
 
-![](assets/Pasted%20image%2020250504225912.png)
+![](../assets/Pasted%20image%2020250504225912.png)
 
 Execute a kerberoasting attack
 
