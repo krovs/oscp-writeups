@@ -46,6 +46,6 @@ Searching for exploit
 
 Generate the reverse shell dll and transfer them to the host
 
-!!! failure
+!!! bug
 
     It doesn't work with PaperStream method or abusing seimpersonateprivilege method (juicypotato, godpotato, printspoofer...)
