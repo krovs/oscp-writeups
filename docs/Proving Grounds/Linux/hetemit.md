@@ -1,0 +1,58 @@
+# Hetemit 🔸
+
+## Enumeration
+
+![](../assets/Pasted%20image%2020250320001715.png)
+![](../assets/Pasted%20image%2020250320001735.png)
+
+## Initial Access
+
+Going to 50000 we have a python api that shows
+
+![](../assets/Pasted%20image%2020250320102701.png)
+
+At /verify we can inject code using os.system() because is python
+
+Using caido
+
+![](../assets/Pasted%20image%2020250320102743.png)
+
+![](../assets/Pasted%20image%2020250320102807.png)
+
+## Privilege Escalation
+
+Get the flag
+
+![](../assets/Pasted%20image%2020250320102902.png)
+
+Checking with linpeas
+
+![](../assets/Pasted%20image%2020250320123728.png)
+
+![](../assets/Pasted%20image%2020250320123743.png)
+
+We can reboot the system and write to that service
+
+![](../assets/Pasted%20image%2020250320124125.png)
+
+It's impossible to edit the file without a fully interactive shell so let's use penelope
+
+https://github.com/brightio/penelope
+
+![](../assets/Pasted%20image%2020250320130850.png)
+
+Changet the execution and the user
+
+![](../assets/Pasted%20image%2020250320132936.png)
+
+We reboot and wait
+
+`sudo /sbin/reboot`
+
+![](../assets/Pasted%20image%2020250320133034.png)
+
+## Post Exploitation
+
+get the flag
+
+![](../assets/Pasted%20image%2020250320133104.png)

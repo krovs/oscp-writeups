@@ -1,0 +1,37 @@
+# Pc 🔸
+
+## Enumeration
+
+![](../assets/Pasted%20image%2020250327233959.png)
+
+## Initial Access
+
+Going to port 8000 we are in a terminal
+
+![](../assets/Pasted%20image%2020250327234109.png)
+
+## Privilege Escalation
+
+We can see a script that opens a 65432
+
+![](../assets/Pasted%20image%2020250328102815.png)
+
+![](../assets/Pasted%20image%2020250328102846.png)
+
+Looking at the code this is a RPC app
+
+![](../assets/Pasted%20image%2020250328121400.png)
+
+Searching for rpc exploits
+
+https://github.com/ehtec/rpcpy-exploit
+
+Change the payload by `chmod +s /bin/bash`
+
+![](../assets/Pasted%20image%2020250328132039.png)
+
+## Post Exploitation
+
+Get the flag
+
+![](../assets/Pasted%20image%2020250328132121.png)

@@ -1,0 +1,85 @@
+[yitais kali) -[~Maser]
+$ nmap -A -T4 —min-rate 5000 -Pn -p- 192.168.195.249
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-03-02 10:44 EST
+Nmap scan report for 192.168.195.249
+
+Host is up (0.0335 latency)
+
+Not shown: 65524 filtered tcp ports (no-response)
+
+PORT STATE SERVICE VERSION
+
+21/tep open ftp vsftpd 3.0.3
+
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+
+[can't get directory listing: TIMEOUT
+I Ftp-syst:
+
+| STAT:
+
+| FTP server status:
+
+1 Connected to 192.168.45.191
+
+1 Logged in as ftp
+
+| TYPE: ASCII
+
+1 No session bandwidth Limit
+
+|
+
+|
+
+!
+
+|
+
+|
+
+Session timeout in seconds is 3
+Control connection is plain text
+Data connections will be plain text
+At session startup, client count was 4
+vsFTPd 3.0.3 - secure, fast, stable
+[end of status
+22/tcp closed ssh
+111/tcp closed rpebind
+139/tcp closed netbios-ssn
+443/tcp closed https
+445/tcp closed microsoft-ds
+2049/tcp closed nfs
+10000/tcp closed snet-sensor-mgmt
+25022/tcp open ssh OpenSSH 8.6 (protocol 2.0)
+| ssh-hostkey
+I e8:dc:f2:9a:2a:78:9b:ee:al:ae:f6:38:1a (ECDSA)
+IL 2:17:14: f3:bc:62:21:06:4a:5e:71:80:ce (ED25519)
+33414/tcp open http Werkzeug httpd 2.2.3 (Python 3.9.13
+[_http-title: 404 Not Found
+|_http-server-header: Werkzeug/2.2.3 Python/3.9.13
+40080/tcp open http Apache httpd 2.4.53 ((Fedora)
+| http-methods:
+I_ Potentially risky methods: TRACE
+["http-title: My test page
+["http-server-header: Apache/2.4.53 (Fedora)
+Aggressive OS guesses: Linux 5.0 - 5.14 (98%), MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3) (98%), Linux 4.15 - 5.19
+(94%), Linux 2.6.32 - 3.13 (93%), OpenWrt 22.03 (Linux 5.10) (92%), Linux 3.10 - 4.11 (91%), Linux 5.0 (91%), Linu
+x 3.2 - 4.14 (90%), Linux 4.15 (90%), Linux 2.6.32 - 3.10 (90%,
+No exact 0S matches for host (test conditions non-ideal).
+Network Distance: 4 hops
+Service Info: 0S: Unix
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT ADDRESS
+
+1 32.53 ms 192.168.45.1
+
+2 32.62 ms 192.168.45.254
+
+3 33.50 ms 192.168.251.
+
+4 33.58 ms 192.168.195.249
+
+OS and Service detection performed. Please report any incorrect results at https: //nmap.org/submit/
+Nmap done: 1 IP address (1 host up) scanned in 72.70 seconds
