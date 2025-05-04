@@ -1,6 +1,6 @@
 # Active
 
-![](assets/Pasted%20image%2020250504215455.png)
+![](../assets/Pasted%20image%2020250504215455.png)
 
 ## Enumeration
 
