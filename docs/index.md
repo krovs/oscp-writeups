@@ -1,12 +1,10 @@
 # Home
 
-[📜 Notes](https://krovs.github.io/oscp-notes)
+## 🛡️ OSCP & eCPPTv3 Prep Writeups
 
 <div align="center">
     <img src=assets/main.png>
 </div>
-
-## 🛡️ OSCP & eCPPTv3 Prep Writeups
 
 This is my collection of writeups from my journey preparing for both the **eCPPTv3** and **OSCP** certifications. I tackled a wide range of machines and challenges, following [Lainkusanagi's guide](https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt/edit?pli=1&gid=487240997#gid=487240997) across **HackTheBox**, **TryHackMe**, and **Proving Grounds**. I also dove into Active Directory labs from **HackTheBox Academy**. 🖥️🔍
 
