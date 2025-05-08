@@ -83,14 +83,10 @@ If we see anthony stuff, in bash history we see
 
 ![](../assets/Pasted%20image%2020250325111457.png)
 
-So the private key is the same for anthony and root so read id_rsa and make ssh login
+So the private key is the same for anthony and root so read id_rsa and login via SSH
 
 ![](../assets/Pasted%20image%2020250325111432.png)
 
 ## Post Exploitation
 
 ![](../assets/Pasted%20image%2020250325111529.png)
-
-
-
-

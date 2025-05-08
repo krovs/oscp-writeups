@@ -76,7 +76,7 @@ We got `tom_admin` that can DCsync to the domain and two kerberoastable users: `
 
 ### Privilege Escalation
 
-He has SeImpersonatePrivilege so well make a PrintSpoofer attack. Transfer the exploit and execute it.
+He has SeImpersonatePrivilege so we'll do a PrintSpoofer attack. Transfer the exploit and execute it.
 
 ![](assets/Pasted%20image%2020250214003902.png)
 
@@ -113,7 +113,7 @@ Using hashcat we got the password
 
 `web_svc:Diamond1`
 
-Now do a ping sweep to found x.x.x.41 and x.x.x.42
+Now do a ping sweep to find x.x.x.41 and x.x.x.42
 
 ![](assets/Pasted%20image%2020250214011743.png)
 
