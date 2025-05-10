@@ -16,7 +16,7 @@
 ```
 eric.wallows:EricLikesRunning800 (creds for .163)
 lisa:905ae9b4d957545fb7b9ea0c4333247b (hash from mimikatz on .163)
-chen:freedom (asreproastable user from .163)
+chen:freedom (AS-REP roastable user from .163)
 
 lisa:905ae9b4d957545fb7b9ea0c4333247b (from .163)
 administrator:3bcdd818f7ec942ac91aa30d8db71927 (from .162)
@@ -24,7 +24,7 @@ administrator:3bcdd818f7ec942ac91aa30d8db71927 (from .162)
 
 ## Enumeration
 
-Ping sweeping the subnet gives three machines.
+Ping sweeping the subnet reveals three machines.
 
 ![](assets/Pasted%20image%2020250226200931.png)
 
@@ -36,13 +36,13 @@ Ping sweeping the subnet gives three machines.
 
 ### Initial Access
 
-Using the provided credentials we enter via winrm
+Using the provided credentials, we access the machine via WinRM.
 
 ![](assets/Pasted%20image%2020250226202054.png)
 
 ### Privilege Escalation
 
-Eric has seimpersonate so we use printspoofer. Create a msfvenom reverse shell and upload it to the machine and start a listener.
+Eric has the `SeImpersonatePrivilege`, so we use PrintSpoofer. Create an MSFVenom reverse shell, upload it to the machine, and start a listener.
 
 ![](assets/Pasted%20image%2020250226203819.png)
 
@@ -54,31 +54,31 @@ Get the flags
 
 ![](assets/Pasted%20image%2020250226204038.png)
 
-Transfer mimikatz and 
+Transfer Mimikatz and extract credentials.
 
 ![](assets/Pasted%20image%2020250226204324.png)
 
-We have lisa's hash, let's try hashcat, but nothing.
+We have Lisa's hash. Let's try Hashcat, but it doesn't yield results.
 
-Transfer adpeas and winpeas.
+Transfer ADPEAS and WinPEAS for further enumeration.
 
 ![](assets/Pasted%20image%2020250226204951.png)
 
-Using hashcat
+Using Hashcat:
 
 ![](assets/Pasted%20image%2020250226205103.png)
 
-so we have `chen:freedom`
+We retrieve `chen:freedom`.
 
-Transfer sharphound and get the result back to bloodhound.
+Transfer SharpHound and analyze the results in BloodHound.
 
 ![](assets/Pasted%20image%2020250226212250.png)
 
-Lisa has allextendedrights over jackie so we can change the password with pth-net:
+Lisa has `AllExtendedRights` over Jackie, so we can change the password using `pth-net`:
 
 ![](assets/Pasted%20image%2020250227000002.png)
 
-And now winrm to the machine
+We can now access the machine via WinRM.
 
 ## 192.168.167.162 DC02
 
@@ -88,7 +88,7 @@ And now winrm to the machine
 
 ### Initial Access
 
-We can evil-winrm to the machine after changing jackie's password.
+We use Evil-WinRM to access the machine after changing Jackie's password.
 
 ![](assets/Pasted%20image%2020250227000126.png)
 
@@ -98,32 +98,31 @@ Get the flag
 
 ![](assets/Pasted%20image%2020250227000305.png)
 
-Frist thing we notice are jackie's permissions and group, sebackupprivilege and backup operators.
-So we can use shadowcopy to get ndist.nit.
+The first thing we notice is Jackie's permissions and group membership, including `SeBackupPrivilege` and `Backup Operators`. We can use ShadowCopy to retrieve `ntds.dit`.
 
-Create and transfer a diskshadow script like:
+Create and transfer a DiskShadow script like this:
 
 ![](assets/Pasted%20image%2020250227001040.png)
 
 ![](assets/Pasted%20image%2020250227001102.png)
 
-Now get ntds.dit with robocopy and the system.
+Now retrieve `ntds.dit` using Robocopy along with the SYSTEM hive.
 
 ![](assets/Pasted%20image%2020250227001138.png)
 
 ![](assets/Pasted%20image%2020250227001206.png)
 
-And using secrets-dump:
+Using `secrets-dump`:
 
 ![](assets/Pasted%20image%2020250227212940.png)
 
-We can reenter with administrator hash using evil-winrm.
+We can re-enter the machine with the administrator hash using Evil-WinRM.
 
 ![](assets/Pasted%20image%2020250227001622.png)
 
 ### Post Exploitation
 
-We get the flag
+Get the flag
 
 ![](assets/Pasted%20image%2020250227001649.png)
 
@@ -135,21 +134,21 @@ We get the flag
 
 ### Initial Access
 
-Having the krbtgt hash we can forge a golden ticket to access to the machine. We need the parent SID. We can use mimikatz as:
+With the `krbtgt` hash, we can forge a Golden Ticket to access the machine. We need the parent SID, which can be retrieved using Mimikatz:
 
 ![](assets/Pasted%20image%2020250227212717.png)
 
-Add sub and domain to host file
+Add the subdomain and domain to the hosts file.
 
 ![](assets/Pasted%20image%2020250227213058.png)
 
-Create the ticket and export it
+Create the ticket and export it.
 
 ![](assets/Pasted%20image%2020250227212753.png)
 
 ![](assets/Pasted%20image%2020250227213020.png)
 
-Access DC01
+Access DC01.
 
 ![](assets/Pasted%20image%2020250227213221.png)
 

