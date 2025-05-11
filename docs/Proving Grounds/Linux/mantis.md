@@ -47,13 +47,13 @@ https://mantisbt.org/bugs/view.php?id=26091
 
 ![](../assets/Pasted%20image%2020250424232940.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250424233107.png)
 
-We see a backup script but can't see it, there is a cron job 
+## Privilege Escalation
+
+We see a backup script but can't see it, there is a cron job
 
 ![](../assets/Pasted%20image%2020250424233334.png)
 

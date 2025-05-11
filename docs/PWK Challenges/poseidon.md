@@ -92,11 +92,11 @@ We use Evil-WinRM to access the machine after changing Jackie's password.
 
 ![](assets/Pasted%20image%2020250227000126.png)
 
-### Privilege Escalation
-
 Get the flag
 
 ![](assets/Pasted%20image%2020250227000305.png)
+
+### Privilege Escalation
 
 The first thing we notice is Jackie's permissions and group membership, including `SeBackupPrivilege` and `Backup Operators`. We can use ShadowCopy to retrieve `ntds.dit`.
 

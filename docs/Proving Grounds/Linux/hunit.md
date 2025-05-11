@@ -77,11 +77,11 @@ SSH with the admin from before and
 
 ![](../assets/Pasted%20image%2020250401131614.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250401131645.png)
+
+## Privilege Escalation
 
 Transfer linpeas and found
 

@@ -36,11 +36,11 @@ Fixing the php script
 
 ![](../assets/Pasted%20image%2020250322021041.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250322021305.png)
+
+## Privilege Escalation
 
 Get a stabler shell with python
 

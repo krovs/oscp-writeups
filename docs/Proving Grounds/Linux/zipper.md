@@ -26,11 +26,11 @@ We can upload a reverse shell to be zipped and then execute it abusing zip slip 
 
 ![](../assets/Pasted%20image%2020250419135254.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250419135310.png)
+
+## Privilege Escalation
 
 There is a backup script with logs on /opt, read the logs.
 

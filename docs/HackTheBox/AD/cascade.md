@@ -161,14 +161,14 @@ Info: Establishing connection to remote endpoint
 cascade\s.smith
 ```
 
-## Privilege Escalation
-
 Get the flag
 
 ```shell
 *Evil-WinRM* PS C:\Users\s.smith\desktop> type user.txt
 995340c15f9857424228c9319a3dc077
 ```
+
+## Privilege Escalation
 
 We can see that s.smith has a logon script
 

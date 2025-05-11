@@ -46,11 +46,11 @@ We can try ssh
 
 ![](../assets/Pasted%20image%2020250325192417.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250325192547.png)
+
+## Privilege Escalation
 
 Execute linpeas and we see
 

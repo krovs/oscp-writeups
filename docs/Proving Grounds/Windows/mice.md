@@ -14,14 +14,14 @@ I executed this in two parts, first get a reverse shell from httpserver and then
 
 ![](../assets/Pasted%20image%2020250423170512.png)
 
-
 ![](../assets/Pasted%20image%2020250423170524.png)
 
-## Privilege Escalation
 
 Get the flag
 
 ![](../assets/Pasted%20image%2020250423170554.png)
+
+## Privilege Escalation
 
 Searching in home folder we find a filezilla base 64 password
 

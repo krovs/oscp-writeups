@@ -30,9 +30,8 @@ Now we have a web shell, using python we make a reverse shell
 
 ![](../assets/Pasted%20image%2020250323134237.png)
 
-## Privilege Escalation
-
 Get the flag
+## Privilege Escalation
 
 Now showing suid programs we have dosbox and searching in gtfobins
 

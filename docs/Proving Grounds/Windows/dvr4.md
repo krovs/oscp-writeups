@@ -22,11 +22,11 @@ We have two users, we can try id_rsa keys
 
 ![](../assets/Pasted%20image%2020250422235347.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250422235451.png)
+
+## Privilege Escalation
 
 Searching for argus vulns we see the weak password encryption
 

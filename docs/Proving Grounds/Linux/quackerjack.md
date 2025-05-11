@@ -28,11 +28,11 @@ So upload in vendors a shell.php, capture the request with caido and put image/g
 
 ![](../assets/Pasted%20image%2020250404175348.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250404182554.png)
+
+## Privilege Escalation
 
 Get credentials
 

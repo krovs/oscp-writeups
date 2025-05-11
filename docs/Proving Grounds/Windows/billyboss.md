@@ -25,11 +25,11 @@ Now executing the exploit (and changing the ip and cmd inside)
 
 ![](../assets/Pasted%20image%2020250410120652.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250410120741.png)
+
+## Privilege Escalation
 
 We have seimpersonate privilege but i can't get potatos to work, whoami doesn't work, no valid for proof.
 

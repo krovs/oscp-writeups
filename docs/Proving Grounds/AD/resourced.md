@@ -32,15 +32,15 @@ nothing, let's pass the hash to move laterally
 
 ![](../assets/Pasted%20image%2020250416191851.png)
 
-Using evil-winrm 
+Using evil-winrm
 
 ![](../assets/Pasted%20image%2020250416191910.png)
-
-## Privilege Escalation
 
 Get the flag
 
 ![](../assets/Pasted%20image%2020250416192043.png)
+
+## Privilege Escalation
 
 Use bloodhound-python to get the zip
 

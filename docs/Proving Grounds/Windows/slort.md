@@ -16,11 +16,11 @@ The url has a rfi vulnerability so we can call a reverse shell
 
 ![](../assets/Pasted%20image%2020250419011617.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250419011640.png)
+
+## Privilege Escalation
 
 There is a backup folder with TFTP.EXE inside and an info.txt that says that tftp will be executed every 5 minutes, and rupert can edit all so generate a reverse shell and replace the binary, reboot the system and wait 5 minutes.
 

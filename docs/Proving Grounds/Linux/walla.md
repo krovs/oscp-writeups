@@ -23,11 +23,11 @@ going to System we have a console
 
 ![](../assets/Pasted%20image%2020250327194937.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250327201231.png)
+
+## Privilege Escalation
 
 we can execute a python script wifi_reset.py
 

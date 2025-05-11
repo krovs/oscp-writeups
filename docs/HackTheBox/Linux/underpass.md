@@ -122,14 +122,14 @@ svcMosh@underpass:~$ whoami
 svcMosh
 ```
 
-## Privilege Escalation
-
 Get the flag
 
 ```shell
 svcMosh@underpass:~$ cat user.txt
 ebb6347ca59834b16b35e1c7b24c9447
 ```
+
+## Privilege Escalation
 
 This user can execute mosh-server as sudo, so create a server and connect to it with mosh-client
 

@@ -18,11 +18,11 @@ Password is in base64 -> `NowiseSloopTheory139`
 
 ![](../assets/Pasted%20image%2020250408005751.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250408010013.png)
+
+## Privilege Escalation
 
 Get pdf from ftp
 

@@ -26,8 +26,6 @@ Once all commands are executed, we can upload a reverse shell and execute it.
 
 ![](../assets/Pasted%20image%2020250405114833.png)
 
-## Privilege Escalation
-
 We have a restricted user so reconstruct the path.
 
 `set PATH=%PATH%;C:\Windows\System32;C:\Windows\System32\WindowsPowerShell\v1.0\;`
@@ -35,6 +33,8 @@ We have a restricted user so reconstruct the path.
 Get the flag
 
 ![](../assets/Pasted%20image%2020250405115147.png)
+
+## Privilege Escalation
 
 Transfer winpeas
 

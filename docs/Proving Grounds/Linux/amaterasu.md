@@ -26,11 +26,11 @@ cat id_rsa.pub > authorized_keys.txt
 
 ![](../assets/Pasted%20image%2020250302190748.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250302190820.png)
+
+## Privilege Escalation
 
 Transfer pspy to the machine and we see a task executing.
 

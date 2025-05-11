@@ -19,11 +19,11 @@ Using caido
 
 ![](../assets/Pasted%20image%2020250320102807.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250320102902.png)
+
+## Privilege Escalation
 
 Checking with linpeas
 

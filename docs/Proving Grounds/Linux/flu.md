@@ -12,11 +12,10 @@ Searching for exploits we have this https://github.com/jbaines-r7/through_the_wi
 
 ![](../assets/Pasted%20image%2020250408134307.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250408135013.png)
+## Privilege Escalation
 
 Notice the script at /opt
 

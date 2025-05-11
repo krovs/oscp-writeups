@@ -26,11 +26,11 @@ Using cadaver we can use webdav with the account and upload a php reverse shell 
 
 ![](../assets/Pasted%20image%2020250409010448.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250409010537.png)
+
+## Privilege Escalation
 
 Winpeas found jerren password
 

@@ -26,11 +26,12 @@ Then set a listener and restart the app with POST /restart
 
 ![](../assets/Pasted%20image%2020250415005518.png)
 
-## Privilege Escalation
 
 Get the flag
 
 ![](../assets/Pasted%20image%2020250415005717.png)
+
+## Privilege Escalation
 
 Search for SUID programs
 

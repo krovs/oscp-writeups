@@ -194,7 +194,6 @@ type user.txt
 3d2c48a0d4a7fab39ef9536da3109a84
 ```
 
-
 ## Privilege Escalation
 
 In the same folder we have cred.xml that shows a xml created with powershell Export-CliXml

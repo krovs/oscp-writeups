@@ -231,7 +231,7 @@ Get the flag
 79eb702b385547cbb18f054fa9246173
 ```
 
-Transfer adPEAS to the host 
+Transfer adPEAS to the host
 
 ![](../assets/Pasted%20image%2020250506091431.png)
 

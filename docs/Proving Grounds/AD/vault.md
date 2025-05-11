@@ -27,11 +27,11 @@ Using hashcat
 
 ![](../assets/Pasted%20image%2020250429201725.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250429201753.png)
+
+## Privilege Escalation
 
 Using bloodhound-python we notice that the user has writedacl permissions
 

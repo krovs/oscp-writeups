@@ -67,11 +67,11 @@ RDP to the machine with molly
 
 ![](../assets/Pasted%20image%2020250427185724.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250427190444.png)
+
+## Privilege Escalation
 
 Open powershell as administrator
 

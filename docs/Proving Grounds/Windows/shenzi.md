@@ -24,11 +24,11 @@ We can log in with credentials, then edit the 404 theme page and put a reverse s
 
 ![](../assets/Pasted%20image%2020250411223259.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250411223319.png)
+
+## Privilege Escalation
 
 Transfer winpeas and discover always install elevated missconfig
 

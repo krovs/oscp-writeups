@@ -36,9 +36,8 @@ enter and go to terminal
 
 ![](../assets/Pasted%20image%2020250324195432.png)
 
+Get the flag
 ## Privilege Escalation
-
-get the flag
 
 with sudo -l we see that we have permissions to run tar with wildcard
 

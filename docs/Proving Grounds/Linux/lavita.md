@@ -28,11 +28,11 @@ We need to clone https://github.com/ambionics/phpggc.git to the same folder as t
 
 ![](../assets/Pasted%20image%2020250411003741.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250411003927.png)
+
+## Privilege Escalation
 
 ![](../assets/Pasted%20image%2020250411004756.png)
 

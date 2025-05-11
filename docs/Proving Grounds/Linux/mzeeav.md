@@ -36,7 +36,6 @@ It only checks the first four bytes so we can add it to a reverse shell php.
 
 We find a fileS in /opt with suid that is the same as find command. So search find in gtfobins.
 
-
 ![](../assets/Pasted%20image%2020250410024853.png)
 
 ## Post Exploitation

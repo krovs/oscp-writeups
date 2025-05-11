@@ -18,11 +18,11 @@ Execute the exploit, we have new user, login as the user and upload de jar, then
 
 ![](../assets/Pasted%20image%2020250419192151.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250419192232.png)
+
+## Privilege Escalation
 
 Find all openfire related folders and search for passwords.
 

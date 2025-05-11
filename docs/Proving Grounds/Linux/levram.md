@@ -20,11 +20,11 @@ Create a project in the app and execute the script
 
 ![](../assets/Pasted%20image%2020250409132302.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250409132347.png)
+
+## Privilege Escalation
 
 Transfer linpeas
 

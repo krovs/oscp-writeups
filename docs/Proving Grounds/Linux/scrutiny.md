@@ -30,11 +30,11 @@ The key is protected so using ssh2john and john we get cheer as password.
 
 ![](../assets/Pasted%20image%2020250420124517.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250419234846.png)
+
+## Privilege Escalation
 
 This user has email so let's check /var/spool/email
 

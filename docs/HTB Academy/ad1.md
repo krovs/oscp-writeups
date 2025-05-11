@@ -272,14 +272,14 @@ inlanefreight\svc_sql
 *Evil-WinRM* PS C:\Users\svc_sql.INLANEFREIGHT\Documents> 
 ```
 
-## Privilege Escalation
-
 Get the flag
 
 ```powershell
 *Evil-WinRM* PS C:\Users\Administrator\desktop> type flag.txt
 spn$_r0ast1ng_on_@n_0p3n_f1re
 ```
+
+## Privilege Escalation
 
 Upload `mimikatz.exe` and extract hashes.
 

@@ -211,7 +211,7 @@ Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 
 Get the flags
 
-```
+```cmd
 C:\Windows\system32>type C:\Users\Administrator\Desktop\root.txt
 33427d458052f593baf71c6fdd9881d2
 C:\Windows\system32>type C:\Users\james\Desktop\user.txt

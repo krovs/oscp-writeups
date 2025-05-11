@@ -45,11 +45,11 @@ Now to christopher.lewis who can ps remote
 
 ![](../assets/Pasted%20image%2020250426011940.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250427010337.png)
+
+## Privilege Escalation
 
 MSSql service is running locally so we transfer chisel and make a port forward
 

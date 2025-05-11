@@ -16,11 +16,11 @@ In pre-receive hook we can put a reverse shell.
 
 ![](../assets/Pasted%20image%2020250408201628.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250408201642.png)
+
+## Privilege Escalation
 
 Transfer linpeas
 

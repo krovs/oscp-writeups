@@ -199,14 +199,14 @@ Info: Establishing connection to remote endpoint
 inlanefreight\ab920
 ```
 
-### Privilege Escalation
-
 Get the flag
 
 ```shell
 *Evil-WinRM* PS C:\> type flag.txt
 aud1t_gr0up_m3mbersh1ps!
 ```
+
+### Privilege Escalation
 
 Make a user list with `nxc` and test weak passwords:
 

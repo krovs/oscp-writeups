@@ -38,11 +38,12 @@ execute reverse shell
 
 ![](../assets/Pasted%20image%2020250330204313.png)
 
-## Privilege Escalation
 
 Get the flag
 
 ![](../assets/Pasted%20image%2020250330221230.png)
+
+## Privilege Escalation
 
 Searching passwords in the blog project we find pablo's
 

@@ -24,11 +24,11 @@ We have access
 
 ![](../assets/Pasted%20image%2020250313235427.png)
 
-## Privilege Escalation
-
 Get the flag
 
 ![](../assets/Pasted%20image%2020250313235441.png)
+
+## Privilege Escalation
 
 With  sudo -l we can see gcore privileges
 
